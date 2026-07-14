@@ -28,7 +28,7 @@ const [filterCourse, setFilterCourse] = useState('')
 
   const fetchGroups = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/groups', {
+      const res = await axios.get('https://study-group-api-014n.onrender.com/api/groups', {
         headers: { Authorization: `Bearer ${token}` }
       })
       setGroups(res.data)
@@ -40,7 +40,7 @@ const [filterCourse, setFilterCourse] = useState('')
   const handleCreate = async (e) => {
     e.preventDefault()
     try {
-      await axios.post('http://localhost:5000/api/groups',
+      await axios.post('https://study-group-api-014n.onrender.com/api/groups',
         { name, description, course },
         { headers: { Authorization: `Bearer ${token}` } }
       )
@@ -55,7 +55,7 @@ const [filterCourse, setFilterCourse] = useState('')
 
   const handleJoin = async (id) => {
     try {
-      await axios.put(`http://localhost:5000/api/groups/${id}/join`, {},
+      await axios.put(`https://study-group-api-014n.onrender.com/api/groups/${id}/join`, {},
         { headers: { Authorization: `Bearer ${token}` } }
       )
       setMessage('Joined group!')
@@ -67,7 +67,7 @@ const [filterCourse, setFilterCourse] = useState('')
 
   const handleLeave = async (id) => {
     try {
-      await axios.put(`http://localhost:5000/api/groups/${id}/leave`, {},
+      await axios.put(`https://study-group-api-014n.onrender.com/api/groups/${id}/leave`, {},
         { headers: { Authorization: `Bearer ${token}` } }
       )
       setMessage('Left group!')
