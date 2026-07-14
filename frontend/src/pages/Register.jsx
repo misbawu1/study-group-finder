@@ -13,7 +13,7 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/register', { name, email, password, course })
+      const res = await axios.post('https://study-group-api-014n.onrender.com/api/auth/register', { name, email, password, course })
       localStorage.setItem('token', res.data.token)
       localStorage.setItem('user', JSON.stringify(res.data))
       navigate('/dashboard')
