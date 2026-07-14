@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { io } from 'socket.io-client'
 
-const socket = io('http://localhost:5000')
+const socket = io('https://study-group-api-014n.onrender.com')
 
 function Chat() {
   const { groupId } = useParams()
@@ -21,11 +21,11 @@ function Chat() {
 
     socket.emit('joinGroup', groupId)
 
-    axios.get(`http://localhost:5000/api/messages/${groupId}`, {
+    axios.get(`https://study-group-api-014n.onrender.com/api/messages/${groupId}`, {
       headers: { Authorization: `Bearer ${token}` }
     }).then(res => setMessages(res.data))
 
-    axios.get('http://localhost:5000/api/groups', {
+    axios.get('https://study-group-api-014n.onrender.com/api/groups', {
       headers: { Authorization: `Bearer ${token}` }
     }).then(res => {
       const g = res.data.find(g => g._id === groupId)
