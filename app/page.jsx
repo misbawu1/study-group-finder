@@ -46,6 +46,15 @@ export default function Home() {
     }
   }, [])
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    if (params.has('auth-error')) {
+      setAuthMode('signin')
+      setAuthMessage('Email confirmation did not complete. Request a fresh confirmation email and try again.')
+      window.history.replaceState({}, '', window.location.pathname)
+    }
+  }, [])
+
   const loadGroups = useCallback(async () => {
     if (!supabase || !user) return
     const { data, error } = await supabase
@@ -89,7 +98,14 @@ export default function Home() {
     const password = form.get('password')
     const fullName = form.get('full_name')
     const result = authMode === 'signup'
-      ? await supabase.auth.signUp({ email, password, options: { data: { full_name: fullName } } })
+      ? await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            data: { full_name: fullName },
+            emailRedirectTo: `${window.location.origin}/auth/callback`
+          }
+        })
       : await supabase.auth.signInWithPassword({ email, password })
     setAuthBusy(false)
     setAuthMessage(result.error?.message || (authMode === 'signup' && !result.data.session ? 'Check your email to confirm your account, then sign in.' : ''))

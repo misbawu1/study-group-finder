@@ -24,7 +24,7 @@ Supabase's free tier currently includes a hosted Postgres database and Auth; fre
    NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-publishable-key
    ```
 
-5. In **Authentication → URL Configuration**, set the Site URL to `http://localhost:3000` while developing. Add your deployed Vercel URL to Redirect URLs after deployment.
+5. In **Authentication → URL Configuration**, set the Site URL to `http://localhost:3000` while developing and add `http://localhost:3000/auth/callback` to Redirect URLs. Add the equivalent production callback URL after deployment.
 6. Install and run:
 
    ```bash
